@@ -6,3 +6,5 @@ dotenv.config({
 export const NODE_ENVIRONMENT = process.env.NODE_ENVIRONMENT;
 export const PORT = process.env.port || 4001;
 export const MONGO_URI = process.env.MONGO_URI;
+export const JWT_SECRET = process.env.JWT_SECRET;
+export const JWT_TOKEN_EXPIRY = process.env.JWT_TOKEN_EXPIRY;

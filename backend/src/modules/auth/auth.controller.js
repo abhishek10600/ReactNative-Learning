@@ -1,11 +1,19 @@
-export const registerController = async (req, res) => {
+import { createUserService } from "./auth.service.js";
+import { registerUserRequestDto } from "./user.request.dto.js";
+
+export const registerController = async (req, res, next) => {
   try {
+    const { username, email, password } = registerUserRequestDto(req.body);
+
+    const result = await createUserService(username, email, password);
+
     return res.status(200).json({
       success: true,
-      message: "Register controller",
+      data: result,
+      message: "Account created successfully",
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 

@@ -1,6 +1,9 @@
 import express from "express";
+import errorMiddleware from "./middlewares/error.middleware.js";
 
 export const app = express();
+
+app.use(express.json());
 
 app.get("/health", (req, res) => {
   return res.status(200).json({
@@ -12,3 +15,5 @@ app.get("/health", (req, res) => {
 import authRouter from "./modules/auth/auth.route.js";
 
 app.use("/api/v1/auth", authRouter);
+
+app.use(errorMiddleware);
