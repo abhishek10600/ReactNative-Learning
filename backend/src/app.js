@@ -13,7 +13,9 @@ app.get("/health", (req, res) => {
 });
 
 import authRouter from "./modules/auth/auth.route.js";
+import bookRouter from "./modules/book/book.route.js";
 
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/book", bookRouter);
 
 app.use(errorMiddleware);

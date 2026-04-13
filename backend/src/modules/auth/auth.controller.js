@@ -1,5 +1,8 @@
-import { createUserService } from "./auth.service.js";
-import { registerUserRequestDto } from "./user.request.dto.js";
+import { createUserService, loginUserService } from "./auth.service.js";
+import {
+  loginUserRequestDto,
+  registerUserRequestDto,
+} from "./user.request.dto.js";
 
 export const registerController = async (req, res, next) => {
   try {
@@ -17,13 +20,18 @@ export const registerController = async (req, res, next) => {
   }
 };
 
-export const loginController = async (req, res) => {
+export const loginController = async (req, res, next) => {
   try {
+    const { email, password } = loginUserRequestDto(req.body);
+
+    const result = await loginUserService(email, password);
+
     return res.status(200).json({
       success: true,
-      message: "Login controller",
+      dat: result,
+      message: "User logged in successfully",
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };

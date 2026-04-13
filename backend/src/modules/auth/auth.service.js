@@ -27,3 +27,23 @@ export const createUserService = async (username, email, password) => {
     token,
   };
 };
+
+export const loginUserService = async (email, password) => {
+  const existingUser = await findUserByEmail(email);
+
+  if (!existingUser) {
+    throw new AppError("Invalid creadentials", 400);
+  }
+
+  const isPasswordCorrect = await existingUser.comparePassword(password);
+  if (!isPasswordCorrect) {
+    throw new AppError("Invalid creadentials", 400);
+  }
+
+  const token = await generateToken(existingUser._id);
+
+  return {
+    user: userResponseDto(existingUser),
+    token,
+  };
+};

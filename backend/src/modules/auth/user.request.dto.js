@@ -28,3 +28,20 @@ export const registerUserRequestDto = (body) => {
     password,
   };
 };
+
+export const loginUserRequestDto = (body) => {
+  const { email, password } = body;
+
+  // validation
+  if (!email || !password) {
+    throw new AppError("All fields are required.", 400);
+  }
+
+  // normalize email
+  const normalizedEmail = email.toLowerCase().trim();
+
+  return {
+    email: normalizedEmail,
+    password,
+  };
+};

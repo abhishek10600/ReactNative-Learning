@@ -4,5 +4,7 @@ export const userResponseDto = (user) => {
     username: user.username,
     email: user.email,
     profileImage: user.profileImage,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
   };
 };
