@@ -1,9 +1,11 @@
 import express from "express";
+import cors from "cors";
 import errorMiddleware from "./middlewares/error.middleware.js";
 
 export const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/health", (req, res) => {
   return res.status(200).json({
